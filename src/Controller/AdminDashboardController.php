@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Flexgrid\Modules\AdminDashboard\Controller;
 
 use Flexgrid\Event\AjaxEvent;
+use Flexgrid\Flexgrid;
 use Flexgrid\Modules\AdminDashboard\Service\DashboardFactory;
 use Flexgrid\Response\AjaxResponse;
 use Flexgrid\Response\PageResponse;
@@ -26,11 +27,16 @@ final class AdminDashboardController
         PageResponse::addAsset('Flexgrid/Flexgrid/src/Html/Admin/Css/AdminUi.scss');
 
         $viewModel = DashboardFactory::create()->getViewModel();
+        Flexgrid::getApp()->appendMainHeader(new TemplateResponse(
+            'Flexgrid/Modules/AdminDashboard/src/Templates/Dashboard/HeaderActions.php',
+            [
+                'headerActions' => array_slice($viewModel['quick_actions'] ?? [], 0, 2),
+                'refreshAction' => $this->getRefreshEventName(),
+            ]
+        ));
 
         return new TemplateResponse('Flexgrid/Modules/AdminDashboard/src/Templates/Dashboard/Dashboard.php', [
             'content' => (string)$this->renderContent($viewModel),
-            'headerActions' => array_slice($viewModel['quick_actions'] ?? [], 0, 2),
-            'refreshAction' => $this->getRefreshEventName(),
         ]);
     }
 

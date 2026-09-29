@@ -5,6 +5,15 @@
 
 .admin-dashboard-header-actions {
   align-items: center;
+  flex-wrap: nowrap;
+  min-width: 0;
+  margin-left: auto;
+  overflow-x: auto;
+
+  > .button,
+  > .admin-dashboard-refresh {
+    flex: 0 0 auto;
+  }
 }
 
 .admin-dashboard-refresh {
@@ -64,21 +73,8 @@
   text-align: right;
 }
 
-@media (max-width: 840px) {
-  .admin-dashboard-header-actions {
-    justify-content: flex-start;
-  }
-}
-
 @media (max-width: 560px) {
   .admin-dashboard .admin-module-grid {
     grid-template-columns: 1fr;
-  }
-
-  .admin-dashboard-header-actions,
-  .admin-dashboard-header-actions .button,
-  .admin-dashboard-refresh,
-  .admin-dashboard-refresh .button {
-    width: 100%;
   }
 }

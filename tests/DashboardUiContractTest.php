@@ -6,12 +6,15 @@ require_once __DIR__ . '/bootstrap.php';
 
 $moduleRoot = dirname(__DIR__);
 $dashboard = file_get_contents($moduleRoot . '/src/Templates/Dashboard/Dashboard.php');
+$headerActions = file_get_contents($moduleRoot . '/src/Templates/Dashboard/HeaderActions.php');
+$controller = file_get_contents($moduleRoot . '/src/Controller/AdminDashboardController.php');
 $content = file_get_contents($moduleRoot . '/src/Templates/Dashboard/Content.php');
 $styles = file_get_contents($moduleRoot . '/src/Templates/Dashboard/Css/Dashboard.scss');
 
-adminDashboardAssert(strpos($dashboard, 'ajax="true"') !== false, 'Dashboardverversing moet Flexgrids declaratieve AJAX-laag gebruiken.');
-adminDashboardAssert(strpos($dashboard, 'button-secondary') !== false && strpos($dashboard, 'button-outline') === false, 'Dashboardacties gebruiken geen slecht zichtbare outlineknop.');
-adminDashboardAssert(strpos($dashboard, 'headerActions') !== false && strpos($dashboard, 'button-publish') !== false, 'Dashboardkop moet de belangrijkste moduleacties zichtbaar maken.');
+adminDashboardAssert(strpos($headerActions, 'ajax="true"') !== false, 'Dashboardverversing moet Flexgrids declaratieve AJAX-laag gebruiken.');
+adminDashboardAssert(strpos($headerActions, 'button-secondary') !== false && strpos($headerActions, 'button-outline') === false, 'Dashboardacties gebruiken geen slecht zichtbare outlineknop.');
+adminDashboardAssert(strpos($headerActions, 'headerActions') !== false && strpos($headerActions, 'button-publish') !== false, 'De main-header moet de belangrijkste moduleacties zichtbaar maken.');
+adminDashboardAssert(strpos($controller, 'appendMainHeader') !== false && strpos($dashboard, 'headerActions') === false, 'Dashboardacties horen uitsluitend in de globale main-header.');
 adminDashboardAssert(strpos($content, "['href']") !== false, 'Dashboardkaarten en tabellen moeten naar hun bronmodule kunnen navigeren.');
 adminDashboardAssert(strpos($content, 'TableRenderer') !== false, 'Dashboardtabellen moeten de gedeelde TableRenderer gebruiken.');
 adminDashboardAssert(strpos($content, 'admin-dashboard-grid--custom') !== false
