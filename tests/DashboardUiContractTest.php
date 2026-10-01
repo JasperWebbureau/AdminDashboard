@@ -14,7 +14,7 @@ $styles = file_get_contents($moduleRoot . '/src/Templates/Dashboard/Css/Dashboar
 adminDashboardAssert(strpos($headerActions, 'ajax="true"') !== false, 'Dashboardverversing moet Flexgrids declaratieve AJAX-laag gebruiken.');
 adminDashboardAssert(strpos($headerActions, 'button-secondary') !== false && strpos($headerActions, 'button-outline') === false, 'Dashboardacties gebruiken geen slecht zichtbare outlineknop.');
 adminDashboardAssert(strpos($headerActions, 'headerActions') !== false && strpos($headerActions, 'button-publish') !== false, 'De main-header moet de belangrijkste moduleacties zichtbaar maken.');
-adminDashboardAssert(strpos($controller, 'appendMainHeader') !== false && strpos($dashboard, 'headerActions') === false, 'Dashboardacties horen uitsluitend in de globale main-header.');
+adminDashboardAssert(strpos($controller, 'AdminAddHeader') !== false && strpos($dashboard, 'headerActions') === false, 'Dashboardacties horen uitsluitend in de gedeelde globale main-header.');
 adminDashboardAssert(strpos($content, "['href']") !== false, 'Dashboardkaarten en tabellen moeten naar hun bronmodule kunnen navigeren.');
 adminDashboardAssert(strpos($content, 'TableRenderer') !== false, 'Dashboardtabellen moeten de gedeelde TableRenderer gebruiken.');
 adminDashboardAssert(strpos($content, 'admin-dashboard-grid--custom') !== false
